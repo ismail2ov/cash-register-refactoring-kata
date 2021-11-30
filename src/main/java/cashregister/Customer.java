@@ -63,36 +63,36 @@ public class Customer {
     }
 
     private double amountFor(OrderLine orderLine) {
-        double thisAmount = 0;
+        double result = 0;
         double thisDiscount;
         // determine amounts for orderLine order line
         switch (orderLine.getProduct().getType()) {
             case Product.REGULAR:
-                thisAmount = orderLine.getQuantity() * orderLine.getProduct().getPrice();
+                result = orderLine.getQuantity() * orderLine.getProduct().getPrice();
                 break;
             case Product.PROMOTED:
-                thisAmount = orderLine.getQuantity() * orderLine.getProduct().getPrice();
+                result = orderLine.getQuantity() * orderLine.getProduct().getPrice();
                 break;
             case Product.SECOND_70_PERCENT_LESS:
                 if (orderLine.getQuantity() >= 2) {
                     int itemsToDiscount = orderLine.getQuantity() / 2;
                     thisDiscount = itemsToDiscount * orderLine.getProduct().getPrice() * 0.7;
-                    thisAmount = orderLine.getQuantity() * orderLine.getProduct().getPrice() - thisDiscount;
+                    result = orderLine.getQuantity() * orderLine.getProduct().getPrice() - thisDiscount;
                 } else {
-                    thisAmount = orderLine.getQuantity() * orderLine.getProduct().getPrice();
+                    result = orderLine.getQuantity() * orderLine.getProduct().getPrice();
                 }
                 break;
             case Product.PROMO_3x2:
                 if (orderLine.getQuantity() >= 3) {
                     int itemsToDiscount = orderLine.getQuantity() / 3;
                     thisDiscount = itemsToDiscount * orderLine.getProduct().getPrice();
-                    thisAmount = orderLine.getQuantity() * orderLine.getProduct().getPrice() - thisDiscount;
+                    result = orderLine.getQuantity() * orderLine.getProduct().getPrice() - thisDiscount;
                 } else {
-                    thisAmount = orderLine.getQuantity() * orderLine.getProduct().getPrice();
+                    result = orderLine.getQuantity() * orderLine.getProduct().getPrice();
                 }
                 break;
         }
 
-        return thisAmount;
+        return result;
     }
 }
