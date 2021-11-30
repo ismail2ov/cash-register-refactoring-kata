@@ -15,8 +15,7 @@ public class OrderLine {
     }
 
     public double amountFor() {
-        int quantity = getQuantity();
-        return product.amountFor(quantity);
+        return product.amountFor(getQuantity());
     }
 
     int creditsFor() {
