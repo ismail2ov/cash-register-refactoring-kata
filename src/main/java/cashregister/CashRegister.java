@@ -1,6 +1,5 @@
 package cashregister;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
@@ -8,7 +7,6 @@ import java.util.List;
 
 @RequiredArgsConstructor
 public class CashRegister {
-    @Getter
     private final Customer customer;
 
     private List<OrderLine> orderLines = new ArrayList<>();
@@ -34,13 +32,11 @@ public class CashRegister {
             double orderLineAmount = orderLine.amountFor();
             accumulatedCredits += orderLine.creditsFor();
 
-            // show figures for orderLine order line
             result.append(printer.printOrderLineFigures(orderLine, orderLineAmount));
             numItems += orderLine.getQuantity();
             totalAmount += orderLineAmount;
         }
 
-        // add footer lines
         result.append(printer.printFooter(totalAmount, accumulatedCredits, numItems));
 
         return result.toString();
