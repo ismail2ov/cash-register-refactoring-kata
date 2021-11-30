@@ -37,7 +37,7 @@ class CustomerShould {
                 "---\n" +
                 "Total amount: 116,77 €\n";
 
-        TextStatementPrinter printer = new TextStatementPrinter();
+        StatementPrinter printer = new TextStatementPrinter();
 
         String actual = customer.statement(printer);
 

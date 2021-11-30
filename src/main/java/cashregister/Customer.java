@@ -26,7 +26,7 @@ public class Customer {
         orderLines.add(new OrderLine(arg1, arg2));
     }
 
-    public String statement(TextStatementPrinter printer) {
+    public String statement(StatementPrinter printer) {
         double totalAmount = 0;
         int accumulatedCredits = 0;
         int numItems = 0;
