@@ -7,22 +7,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CustomerShould {
 
-    private Customer customer;
+    private CashRegister cashRegister;
 
     @BeforeEach
     void setUp() {
-        this.customer = new Customer("John Doe");
+        Customer customer = new Customer("John Doe");
+        this.cashRegister = new CashRegister(customer);
 
-        customer.addProduct(new Product("Dodot Sensitive Wipes", 2.30d, getRegularProductType()), 6);
-        customer.addProduct(new Product("Pants Dodot size 4", 24.70d, getPromo3x2ProductType()), 2);
-        customer.addProduct(new Product("Chicco Soft Silicone Pacifier", 5.99d, getPromo3x2ProductType()), 1);
-        customer.addProduct(new Product("Johnson's Baby Shampoo", 4.09, getPromotedProductType()), 2);
-        customer.addProduct(new Product("Blevit Plus Multigrain porridge", 12.27d, getSecond70PercentLessProductType()), 1);
-        customer.addProduct(new Product("Hero Baby Puree, vegetables with chicken", 6.05d, getSecond70PercentLessProductType()), 1);
-        customer.addProduct(new Product("Puleva infant milk", 1.45, getRegularProductType()), 12);
+        cashRegister.addProduct(new Product("Dodot Sensitive Wipes", 2.30d, getRegularProductType()), 6);
+        cashRegister.addProduct(new Product("Pants Dodot size 4", 24.70d, getPromo3x2ProductType()), 2);
+        cashRegister.addProduct(new Product("Chicco Soft Silicone Pacifier", 5.99d, getPromo3x2ProductType()), 1);
+        cashRegister.addProduct(new Product("Johnson's Baby Shampoo", 4.09, getPromotedProductType()), 2);
+        cashRegister.addProduct(new Product("Blevit Plus Multigrain porridge", 12.27d, getSecond70PercentLessProductType()), 1);
+        cashRegister.addProduct(new Product("Hero Baby Puree, vegetables with chicken", 6.05d, getSecond70PercentLessProductType()), 1);
+        cashRegister.addProduct(new Product("Puleva infant milk", 1.45, getRegularProductType()), 12);
 
-        customer.addProduct(new Product("Pants Dodot size 4", 24.70d, getPromo3x2ProductType()), 1);
-        customer.addProduct(new Product("Blevit Plus Multigrain porridge", 12.27d, getSecond70PercentLessProductType()), 1);
+        cashRegister.addProduct(new Product("Pants Dodot size 4", 24.70d, getPromo3x2ProductType()), 1);
+        cashRegister.addProduct(new Product("Blevit Plus Multigrain porridge", 12.27d, getSecond70PercentLessProductType()), 1);
     }
 
     @Test
@@ -44,7 +45,7 @@ class CustomerShould {
 
         StatementPrinter printer = new TextStatementPrinter();
 
-        String actual = customer.statement(printer);
+        String actual = cashRegister.statement(printer);
 
         assertEquals(expected, actual);
     }
@@ -68,7 +69,7 @@ class CustomerShould {
 
         StatementPrinter printer = new HtmlStatementPrinter();
 
-        String actual = customer.statement(printer);
+        String actual = cashRegister.statement(printer);
 
         assertEquals(expected, actual);
     }
