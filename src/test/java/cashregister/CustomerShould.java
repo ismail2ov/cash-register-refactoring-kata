@@ -1,14 +1,17 @@
 package cashregister;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CustomerShould {
 
-    @Test
-    void printStatementInTextFormat() {
-        Customer customer = new Customer("John Doe");
+    private Customer customer;
+
+    @BeforeEach
+    void setUp() {
+        this.customer = new Customer("John Doe");
 
         customer.addProduct(new Product("Dodot Sensitive Wipes", 2.30d, getRegularProductType()), 6);
         customer.addProduct(new Product("Pants Dodot size 4", 24.70d, getPromo3x2ProductType()), 2);
@@ -20,8 +23,10 @@ class CustomerShould {
 
         customer.addProduct(new Product("Pants Dodot size 4", 24.70d, getPromo3x2ProductType()), 1);
         customer.addProduct(new Product("Blevit Plus Multigrain porridge", 12.27d, getSecond70PercentLessProductType()), 1);
+    }
 
-
+    @Test
+    void printStatementInTextFormat() {
         String expected = "Statement for John Doe\n" +
                 "\t Dodot Sensitive Wipes: 6 x 2,30 = 13,80 €\n" +
                 "\t Pants Dodot size 4: 3 x 24,70 = 49,40 €\n" +
@@ -46,20 +51,6 @@ class CustomerShould {
 
     @Test
     void printStatementInHtmlFormat() {
-        Customer customer = new Customer("John Doe");
-
-        customer.addProduct(new Product("Dodot Sensitive Wipes", 2.30d, getRegularProductType()), 6);
-        customer.addProduct(new Product("Pants Dodot size 4", 24.70d, getPromo3x2ProductType()), 2);
-        customer.addProduct(new Product("Chicco Soft Silicone Pacifier", 5.99d, getPromo3x2ProductType()), 1);
-        customer.addProduct(new Product("Johnson's Baby Shampoo", 4.09, getPromotedProductType()), 2);
-        customer.addProduct(new Product("Blevit Plus Multigrain porridge", 12.27d, getSecond70PercentLessProductType()), 1);
-        customer.addProduct(new Product("Hero Baby Puree, vegetables with chicken", 6.05d, getSecond70PercentLessProductType()), 1);
-        customer.addProduct(new Product("Puleva infant milk", 1.45, getRegularProductType()), 12);
-
-        customer.addProduct(new Product("Pants Dodot size 4", 24.70d, getPromo3x2ProductType()), 1);
-        customer.addProduct(new Product("Blevit Plus Multigrain porridge", 12.27d, getSecond70PercentLessProductType()), 1);
-
-
         String expected = "Statement for <b>John Doe</b><br />\n" +
                 "\t <b>Dodot Sensitive Wipes:</b> 6 x 2,30 = <b>13,80 €</b><br />\n" +
                 "\t <b>Pants Dodot size 4:</b> 3 x 24,70 = <b>49,40 €</b><br />\n" +
