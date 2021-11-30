@@ -47,4 +47,17 @@ public class OrderLine {
 
         return result;
     }
+
+    int creditsFor() {
+        int accumulatedCredits = 0;
+        // add credits for purchasing more than 10 units of regular products
+        if ((getProduct().getType() == Product.REGULAR) && getQuantity() > 10) {
+            accumulatedCredits++;
+        }
+        // add extra credit for every promoted product purchased
+        if (getProduct().getType() == Product.PROMOTED) {
+            accumulatedCredits += getQuantity();
+        }
+        return accumulatedCredits;
+    }
 }

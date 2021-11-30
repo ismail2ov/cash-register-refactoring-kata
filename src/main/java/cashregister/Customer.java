@@ -33,16 +33,13 @@ public class Customer {
         String result = "Statement for " + getName() + "\n";
 
         for (OrderLine orderLine : orderLines) {
-            double thisAmount = 0;
-
-            thisAmount = orderLine.amountFor();
-
-            accumulatedCredits += creditsFor(orderLine);
+            double orderLineAmount = orderLine.amountFor();
+            accumulatedCredits += orderLine.creditsFor();
 
             // show figures for orderLine order line
-            result += String.format("\t %s: %d x %.2f = %.2f €\n", orderLine.getProduct().getName(), orderLine.getQuantity(), orderLine.getProduct().getPrice(), thisAmount);
+            result += String.format("\t %s: %d x %.2f = %.2f €\n", orderLine.getProduct().getName(), orderLine.getQuantity(), orderLine.getProduct().getPrice(), orderLineAmount);
             numItems += orderLine.getQuantity();
-            totalAmount += thisAmount;
+            totalAmount += orderLineAmount;
         }
 
         // add footer lines
@@ -54,17 +51,6 @@ public class Customer {
         result += String.format("Total amount: %.2f €\n", totalAmount);
 
         return result;
-    }
-
-    private int creditsFor(OrderLine orderLine) {
-        int accumulatedCredits = 0;
-        // add credits for purchasing more than 10 units of regular products
-        if ((orderLine.getProduct().getType() == Product.REGULAR) && orderLine.getQuantity() > 10)
-            accumulatedCredits++;
-        // add extra credit for every promoted product purchased
-        if (orderLine.getProduct().getType() == Product.PROMOTED)
-            accumulatedCredits += orderLine.getQuantity();
-        return accumulatedCredits;
     }
 
 }
