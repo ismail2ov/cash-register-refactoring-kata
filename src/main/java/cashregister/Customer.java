@@ -26,31 +26,27 @@ public class Customer {
         orderLines.add(new OrderLine(arg1, arg2));
     }
 
-    public String statement() {
+    public String statement(TextStatementPrinter printer) {
         double totalAmount = 0;
         int accumulatedCredits = 0;
         int numItems = 0;
-        String result = "Statement for " + getName() + "\n";
+        String name = getName();
+        StringBuilder result = new StringBuilder(printer.printHeader(name));
 
         for (OrderLine orderLine : orderLines) {
             double orderLineAmount = orderLine.amountFor();
             accumulatedCredits += orderLine.creditsFor();
 
             // show figures for orderLine order line
-            result += String.format("\t %s: %d x %.2f = %.2f €\n", orderLine.getProduct().getName(), orderLine.getQuantity(), orderLine.getProduct().getPrice(), orderLineAmount);
+            result.append(printer.printOrderLineFigures(orderLine, orderLineAmount));
             numItems += orderLine.getQuantity();
             totalAmount += orderLineAmount;
         }
 
         // add footer lines
-        result += "---\n";
-        result += String.format("Number of items: %d\n", numItems);
-        result += "---\n";
-        result += String.format("Credits accumulated in this purchase: %d\n", accumulatedCredits);
-        result += "---\n";
-        result += String.format("Total amount: %.2f €\n", totalAmount);
+        result.append(printer.printFooter(totalAmount, accumulatedCredits, numItems));
 
-        return result;
+        return result.toString();
     }
 
 }

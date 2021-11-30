@@ -37,7 +37,9 @@ class CustomerShould {
                 "---\n" +
                 "Total amount: 116,77 €\n";
 
-        String actual = customer.statement();
+        TextStatementPrinter printer = new TextStatementPrinter();
+
+        String actual = customer.statement(printer);
 
         assertEquals(expected, actual);
     }
