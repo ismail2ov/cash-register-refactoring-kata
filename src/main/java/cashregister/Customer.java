@@ -36,7 +36,7 @@ public class Customer {
             double thisAmount = 0;
             double thisDiscount = 0;
 
-            thisAmount = amountFor(orderLine);
+            thisAmount = orderLine.amountFor();
 
             // add credits for purchasing more than 10 units of regular products
             if ((orderLine.getProduct().getType() == Product.REGULAR) && orderLine.getQuantity() > 10)
@@ -62,37 +62,4 @@ public class Customer {
         return result;
     }
 
-    private double amountFor(OrderLine orderLine) {
-        double result = 0;
-        double thisDiscount;
-        // determine amounts for orderLine order line
-        switch (orderLine.getProduct().getType()) {
-            case Product.REGULAR:
-                result = orderLine.getQuantity() * orderLine.getProduct().getPrice();
-                break;
-            case Product.PROMOTED:
-                result = orderLine.getQuantity() * orderLine.getProduct().getPrice();
-                break;
-            case Product.SECOND_70_PERCENT_LESS:
-                if (orderLine.getQuantity() >= 2) {
-                    int itemsToDiscount = orderLine.getQuantity() / 2;
-                    thisDiscount = itemsToDiscount * orderLine.getProduct().getPrice() * 0.7;
-                    result = orderLine.getQuantity() * orderLine.getProduct().getPrice() - thisDiscount;
-                } else {
-                    result = orderLine.getQuantity() * orderLine.getProduct().getPrice();
-                }
-                break;
-            case Product.PROMO_3x2:
-                if (orderLine.getQuantity() >= 3) {
-                    int itemsToDiscount = orderLine.getQuantity() / 3;
-                    thisDiscount = itemsToDiscount * orderLine.getProduct().getPrice();
-                    result = orderLine.getQuantity() * orderLine.getProduct().getPrice() - thisDiscount;
-                } else {
-                    result = orderLine.getQuantity() * orderLine.getProduct().getPrice();
-                }
-                break;
-        }
-
-        return result;
-    }
 }
