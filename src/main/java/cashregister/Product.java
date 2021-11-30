@@ -16,33 +16,6 @@ public class Product {
     private double price;
     private ProductType type;
 
-    public Product(String name, double price, int type) {
-        this.name = name;
-        this.price = price;
-        setType(type);
-    }
-
-    private void setType(int type) {
-        switch (type) {
-            case REGULAR:
-                this.type = new RegularProductType();
-                break;
-            case PROMOTED:
-                this.type = new PromotedProductType();
-                break;
-            case SECOND_70_PERCENT_LESS:
-                this.type = new Second70PercentLessProductType();
-                break;
-            case PROMO_3x2:
-                this.type = new Promo3x2ProductType();
-                break;
-        }
-    }
-
-    public int getType() {
-        return type.getProductType();
-    }
-
     double amountFor(int quantity) {
         return this.type.getAmount(quantity, this.getPrice());
     }

@@ -1,7 +1,9 @@
 package cashregister;
 
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode
 abstract class ProductType {
-    public abstract int getProductType();
 
     public double getAmount(int quantity, double price) {
         return quantity * price;

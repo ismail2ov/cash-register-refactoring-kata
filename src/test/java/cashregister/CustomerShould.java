@@ -10,16 +10,16 @@ class CustomerShould {
     void printStatementInTextFormat() {
         Customer customer = new Customer("John Doe");
 
-        customer.addProduct(new Product("Dodot Sensitive Wipes", 2.30d, Product.REGULAR), 6);
-        customer.addProduct(new Product("Pants Dodot size 4", 24.70d, Product.PROMO_3x2), 2);
-        customer.addProduct(new Product("Chicco Soft Silicone Pacifier", 5.99d, Product.PROMO_3x2), 1);
-        customer.addProduct(new Product("Johnson's Baby Shampoo", 4.09, Product.PROMOTED), 2);
-        customer.addProduct(new Product("Blevit Plus Multigrain porridge", 12.27d, Product.SECOND_70_PERCENT_LESS), 1);
-        customer.addProduct(new Product("Hero Baby Puree, vegetables with chicken", 6.05d, Product.SECOND_70_PERCENT_LESS), 1);
-        customer.addProduct(new Product("Puleva infant milk", 1.45, Product.REGULAR), 12);
+        customer.addProduct(new Product("Dodot Sensitive Wipes", 2.30d, getRegularProductType()), 6);
+        customer.addProduct(new Product("Pants Dodot size 4", 24.70d, getPromo3x2ProductType()), 2);
+        customer.addProduct(new Product("Chicco Soft Silicone Pacifier", 5.99d, getPromo3x2ProductType()), 1);
+        customer.addProduct(new Product("Johnson's Baby Shampoo", 4.09, getPromotedProductType()), 2);
+        customer.addProduct(new Product("Blevit Plus Multigrain porridge", 12.27d, getSecond70PercentLessProductType()), 1);
+        customer.addProduct(new Product("Hero Baby Puree, vegetables with chicken", 6.05d, getSecond70PercentLessProductType()), 1);
+        customer.addProduct(new Product("Puleva infant milk", 1.45, getRegularProductType()), 12);
 
-        customer.addProduct(new Product("Pants Dodot size 4", 24.70d, Product.PROMO_3x2), 1);
-        customer.addProduct(new Product("Blevit Plus Multigrain porridge", 12.27d, Product.SECOND_70_PERCENT_LESS), 1);
+        customer.addProduct(new Product("Pants Dodot size 4", 24.70d, getPromo3x2ProductType()), 1);
+        customer.addProduct(new Product("Blevit Plus Multigrain porridge", 12.27d, getSecond70PercentLessProductType()), 1);
 
 
         String expected = "Statement for John Doe\n" +
@@ -40,5 +40,21 @@ class CustomerShould {
         String actual = customer.statement();
 
         assertEquals(expected, actual);
+    }
+
+    private Second70PercentLessProductType getSecond70PercentLessProductType() {
+        return new Second70PercentLessProductType();
+    }
+
+    private PromotedProductType getPromotedProductType() {
+        return new PromotedProductType();
+    }
+
+    private Promo3x2ProductType getPromo3x2ProductType() {
+        return new Promo3x2ProductType();
+    }
+
+    private RegularProductType getRegularProductType() {
+        return new RegularProductType();
     }
 }
